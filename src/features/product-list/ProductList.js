@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   increment,
   incrementAsync,
   selectCount,
 } from './productListSlice';
-
+import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 const sortOptions = [
@@ -59,6 +59,10 @@ const filters = [
     ],
   },
 ]
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 const products = [
   {
@@ -372,8 +376,6 @@ export default function ProductList() {
           </main>
         </div>
       </div>
-
-
     </div>
   );
 }
