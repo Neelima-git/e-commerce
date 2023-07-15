@@ -41,7 +41,9 @@ export default function Navbar({ children }) {
                                                         src='../logo.svg'
                                                         alt="OwnNow logo"
                                                     /> */}
-                                                    {/* <h1 className="text-3xl font-bold tracking-tight text-white">OwnNow</h1> */}
+                                                    <Link to='/' >
+                                                    <h1 className="text-3xl font-bold tracking-tight text-white">OwnNow</h1>
+                                                    </Link>
                                                 </div>
                                                 <div className="hidden md:block">
                                                     <div className="ml-10 flex items-baseline space-x-4">
@@ -188,11 +190,11 @@ export default function Navbar({ children }) {
                             </>
                         )}
                     </Disclosure>
-                    <header className="py-10">
+                    {/* <header className="py-10">
                         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                            <h1 className="text-3xl font-bold tracking-tight text-white">OwnNow</h1>
+                            <h1 className="text-3xl font-bold tracking-tight text-white"></h1>
                         </div>
-                    </header>
+                    </header> */}
                 </div>
 
                 <main className="-mt-32">
