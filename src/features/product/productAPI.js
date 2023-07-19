@@ -11,10 +11,13 @@ export function fetchAllProducts() {
 export function fetchProductsByFilters(filter) {
   let queryString = '';
   for(let key in filter){
-    queryString += `${key}=${filter[key]}`
+    queryString += `${key}=${filter[key]}&`
   }
+  console.log(queryString, "huhahoii");
   return new Promise(async (resolve) => {
+    console.log(queryString, "queryString");
     const response = await fetch('http://localhost:8080/products?'+queryString)
+    console.log(response, "response");
     const data = await response.json()
     resolve({data})
   } )
