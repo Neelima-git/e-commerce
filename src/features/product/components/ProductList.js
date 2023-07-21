@@ -147,11 +147,11 @@ export default function ProductList() {
     console.log(section.id, option.value);
   }
 
-  const handleSort = (e, section, option) => {
-    const newFilter = {...filter, _sort: option.sort, _order: option.order}
+  const handleSort = (e, option) => {
+    const newFilter = {...filter, _sort:option.sort, _order:option.order}
     setFilter(newFilter)
     dispatch(fetchProductsByFiltersAsync(newFilter))
-    console.log(section.id, option.value);
+    // console.log(section.id, option.value);
   }
 
   useEffect(() => {

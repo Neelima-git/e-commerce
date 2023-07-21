@@ -13,7 +13,6 @@ export function fetchProductsByFilters(filter) {
   for(let key in filter){
     queryString += `${key}=${filter[key]}&`
   }
-  console.log(queryString, "huhahoii");
   return new Promise(async (resolve) => {
     console.log(queryString, "queryString");
     const response = await fetch('http://localhost:8080/products?'+queryString)
