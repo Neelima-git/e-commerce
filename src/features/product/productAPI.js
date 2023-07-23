@@ -9,6 +9,8 @@ export function fetchAllProducts() {
 }
 
 export function fetchProductsByFilters(filter) {
+  //filter = {"category": ["smartphone", "laptops"]}
+  //sort = {_sort:"price", _order="desc"}
   let queryString = '';
   for(let key in filter){
     queryString += `${key}=${filter[key]}&`
