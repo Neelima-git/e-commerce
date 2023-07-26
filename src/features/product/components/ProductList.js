@@ -154,7 +154,7 @@ export default function ProductList() {
       }
     } else{
       const index = newFilter[section.id].findIndex(el=>el===option.value)
-      newFilter.splice(index, 1)
+      newFilter[section.id].splice(index, 1)
     }
 
     setFilter(newFilter)
@@ -163,7 +163,7 @@ export default function ProductList() {
   const handleSort = (e, option) => {
     const sort = {_sort: option.sort, _order: option.order }
     setSort(sort)
-    dispatch(fetchProductsByFiltersAsync({newFilter}))
+    // dispatch(fetchProductsByFiltersAsync({newFilter}))
     // console.log(section.id, option.value);
   }
 
