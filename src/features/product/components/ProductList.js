@@ -9,6 +9,7 @@ import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon, StarIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom';
+import { ITEMS_PER_PAGE } from '../../../app/constants';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
@@ -140,6 +141,8 @@ export default function ProductList() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
+  const [page, setPage] = useState(1);
+
 
   const handleFilter = (e, section, option) => {
     console.log((e.target.checked));
@@ -163,13 +166,17 @@ export default function ProductList() {
   const handleSort = (e, option) => {
     const sort = {_sort: option.sort, _order: option.order }
     setSort(sort)
-    // dispatch(fetchProductsByFiltersAsync({newFilter}))
-    // console.log(section.id, option.value);
+  }
+
+  const handlePage = (e, page) => {
+    const pagination = {_sort: option.sort, _order: option.order }
+    setPage(page)
   }
 
   useEffect(() => {
-    dispatch(fetchProductsByFiltersAsync({filter, sort}))
-  }, [dispatch, filter, sort])
+    const pagination = {_page: page, _limit: ITEMS_PER_PAGE}
+    dispatch(fetchProductsByFiltersAsync({filter, sort, pagination}))
+  }, [dispatch, filter, sort, page])
 
   return (
     <div>
@@ -258,7 +265,7 @@ export default function ProductList() {
             </section>
             {/* Product and filters section ends here */}
 
-              <Pagination></Pagination>
+              <Pagination page={page} setPage={setPage} handlePage={handlePage} ></Pagination>
           </main>
         </div>
       </div>
@@ -413,7 +420,7 @@ function DesktopFilter({handleFilter}) {
   )
 }
 
-function Pagination() {
+function Pagination({page, setPage, handlePage}) {
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
@@ -433,7 +440,7 @@ function Pagination() {
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">1</span> to <span className="font-medium">10</span> of{' '}
+            Showing <span className="font-medium">{(page-1*ITEMS_PER_PAGE)}</span> to <span className="font-medium">{(page*ITEMS_PER_PAGE)}</span> of{' '}
             <span className="font-medium">97</span> results
           </p>
         </div>
