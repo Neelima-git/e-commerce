@@ -6,7 +6,7 @@ const products = [
         id: 1,
         name: 'Micro Backpack',
         href: '#',
-        price: '$70.00',
+        price: '$80.00',
         color: 'Moss',
         size: '5L',
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/checkout-page-04-product-01.jpg',
