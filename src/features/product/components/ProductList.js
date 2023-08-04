@@ -93,7 +93,7 @@ export default function ProductList() {
   useEffect(() => {
     dispatch(fetchBrandsAsync())
     dispatch(fetchCategoriesAsync())
-  })
+  }, [])
 
   return (
     <div>
