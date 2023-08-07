@@ -421,7 +421,7 @@ function ProductGrid({ products }) {
 
         <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8">
           {products.map((product) => (
-            <Link to='/product-detail' >
+            <Link to={`/product-detail/${product.id}`} key={product.id} >
               <div key={product.id}>
                 <div className="relative">
                   <div className="relative h-72 w-full overflow-hidden rounded-lg">
