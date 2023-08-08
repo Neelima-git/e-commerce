@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { useForm } from "react-hook-form"
+import {
+  increment,
+  incrementAsync,
+} from '../authSlice';
 
 export default function Signup() {
+
+  const dispatch = useDispatch();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
   return (
     <div>
-         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Create a New Account
@@ -12,7 +22,9 @@ export default function Signup() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit((data) => {
+            console.log(data);
+          })} >
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -20,7 +32,7 @@ export default function Signup() {
               <div className="mt-2">
                 <input
                   id="email"
-                  name="email"
+                  {...register("email")}
                   type="email"
                   autoComplete="email"
                   required
@@ -38,7 +50,7 @@ export default function Signup() {
               <div className="mt-2">
                 <input
                   id="password"
-                  name="password"
+                  {...register("password")}
                   type="password"
                   autoComplete="current-password"
                   required
@@ -56,7 +68,7 @@ export default function Signup() {
               <div className="mt-2">
                 <input
                   id="confirm-password"
-                  name="confirm-password"
+                  {...register("confirm-password")}
                   type="password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
