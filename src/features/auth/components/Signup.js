@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
+import { selectedLoggedInUser, createUserAsync } from '../authSlice';
 import {
   increment,
   incrementAsync,
@@ -25,7 +26,7 @@ export default function Signup() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form noValidate className="space-y-6" onSubmit={handleSubmit((data) => {
-            console.log(data);
+            dispatch(createUserAsync(data))
           })} >
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
