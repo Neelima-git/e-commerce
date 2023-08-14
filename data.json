@@ -2339,6 +2339,11 @@
       "email": "neelima@gmail.com",
       "password": "Password1@",
       "id": 1
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "Test1234",
+      "id": 2
     }
   ]
 }
