@@ -2,6 +2,8 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectItems } from '../cart/cartSlice'
 
 const user = {
     name: 'Tom Cook',
@@ -24,6 +26,9 @@ function classNames(...classes) {
 }
 
 export default function Navbar({ children }) {
+    
+    const items = useSelector(selectItems);
+    console.log(items);
     return (
         <>
             <div className="min-h-full">
@@ -75,7 +80,7 @@ export default function Navbar({ children }) {
                                                             <span className="sr-only">View notifications</span>
                                                             <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                                                             <span className="absolute top-0 right-0 -mt-1 -mr-1 inline-flex items-center justify-center rounded-full bg-blue-100 h-4 w-4 text-xs font-medium text-blue-700">
-                                                                3
+                                                                {items.length}
                                                             </span>
                                                         </button>
                                                     </Link>
@@ -167,7 +172,7 @@ export default function Navbar({ children }) {
                                                     <span className="sr-only">View notifications</span>
                                                     <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                                                     <span className="absolute top-0 right-0 -mt-1 -mr-1 inline-flex items-center justify-center rounded-full bg-blue-100 h-4 w-4 text-xs font-medium text-blue-700">
-                                                        3
+                                                        {items.length}
                                                     </span>
                                                 </button>
                                             </Link>

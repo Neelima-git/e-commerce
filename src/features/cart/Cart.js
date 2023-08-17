@@ -9,7 +9,6 @@ import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroic
 import { Link } from 'react-router-dom';
 
 export default function Cart() {
-  const count = useSelector(selectCount);
   const dispatch = useDispatch();
 
   const products = [
