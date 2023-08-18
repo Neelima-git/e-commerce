@@ -4,12 +4,17 @@ import {
   increment,
   incrementAsync,
   selectCount,
+  selectItems,
 } from './cartSlice';
 import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom';
 
 export default function Cart() {
   const dispatch = useDispatch();
+  const items = useSelector(selectItems);
+  console.log(items);
+  const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0 )
+  const totalItems = items.reduce((total, item) => item.quantity + total, 0 )
 
   const products = [
     {
@@ -142,7 +147,7 @@ export default function Cart() {
             <dl className="mt-6 space-y-4">
               <div className="flex items-center justify-between">
                 <dt className="text-sm text-gray-600">Subtotal</dt>
-                <dd className="text-sm font-medium text-gray-900">$99.00</dd>
+                <dd className="text-sm font-medium text-gray-900">{totalAmount}</dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="flex items-center text-sm text-gray-600">
