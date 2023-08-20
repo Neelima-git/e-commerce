@@ -2367,6 +2367,47 @@
       ],
       "quantity": 1,
       "user": 2
+    },
+    {
+      "id": 39,
+      "title": "Women Sweaters Wool",
+      "description": "2021 Custom Winter Fall Zebra Knit Crop Top Women Sweaters Wool Mohair Cos Customize Crew Neck Women' S Crop Top Sweater",
+      "price": 600,
+      "discountPercentage": 17.2,
+      "rating": 4.55,
+      "stock": 55,
+      "brand": "Top Sweater",
+      "category": "tops",
+      "thumbnail": "https://i.dummyjson.com/data/products/39/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/39/1.jpg",
+        "https://i.dummyjson.com/data/products/39/2.jpg",
+        "https://i.dummyjson.com/data/products/39/3.jpg",
+        "https://i.dummyjson.com/data/products/39/4.jpg",
+        "https://i.dummyjson.com/data/products/39/thumbnail.jpg"
+      ],
+      "quantity": 1,
+      "user": 2
+    },
+    {
+      "id": 17,
+      "title": "Tree Oil 30ml",
+      "description": "Tea tree oil contains a number of compounds, including terpinen-4-ol, that have been shown to kill certain bacteria,",
+      "price": 12,
+      "discountPercentage": 4.09,
+      "rating": 4.52,
+      "stock": 78,
+      "brand": "Hemani Tea",
+      "category": "skincare",
+      "thumbnail": "https://i.dummyjson.com/data/products/17/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/17/1.jpg",
+        "https://i.dummyjson.com/data/products/17/2.jpg",
+        "https://i.dummyjson.com/data/products/17/3.jpg",
+        "https://i.dummyjson.com/data/products/17/thumbnail.jpg"
+      ],
+      "quantity": 1,
+      "user": 1
     }
   ]
 }

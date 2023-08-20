@@ -16,41 +16,41 @@ export default function Cart() {
   const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0 )
   const totalItems = items.reduce((total, item) => item.quantity + total, 0 )
 
-  const products = [
-    {
-      id: 1,
-      name: 'Basic Tee',
-      href: '#',
-      price: '$32.00',
-      color: 'Sienna',
-      inStock: true,
-      size: 'Large',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-01.jpg',
-      imageAlt: "Front of men's Basic Tee in sienna.",
-    },
-    {
-      id: 2,
-      name: 'Basic Tee',
-      href: '#',
-      price: '$32.00',
-      color: 'Black',
-      inStock: false,
-      leadTime: '3–4 weeks',
-      size: 'Large',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-02.jpg',
-      imageAlt: "Front of men's Basic Tee in black.",
-    },
-    {
-      id: 3,
-      name: 'Nomad Tumbler',
-      href: '#',
-      price: '$35.00',
-      color: 'White',
-      inStock: true,
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-03.jpg',
-      imageAlt: 'Insulated bottle with white base and black snap lid.',
-    },
-  ]
+  // const items = [
+  //   {
+  //     id: 1,
+  //     name: 'Basic Tee',
+  //     href: '#',
+  //     price: '$32.00',
+  //     color: 'Sienna',
+  //     inStock: true,
+  //     size: 'Large',
+  //     imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-item-01.jpg',
+  //     imageAlt: "Front of men's Basic Tee in sienna.",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Basic Tee',
+  //     href: '#',
+  //     price: '$32.00',
+  //     color: 'Black',
+  //     inStock: false,
+  //     leadTime: '3–4 weeks',
+  //     size: 'Large',
+  //     imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-item-02.jpg',
+  //     imageAlt: "Front of men's Basic Tee in black.",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Nomad Tumbler',
+  //     href: '#',
+  //     price: '$35.00',
+  //     color: 'White',
+  //     inStock: true,
+  //     imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-item-03.jpg',
+  //     imageAlt: 'Insulated bottle with white base and black snap lid.',
+  //   },
+  // ]
 
   return (
     <div className="bg-white">
@@ -63,12 +63,12 @@ export default function Cart() {
             </h2>
 
             <ul role="list" className="divide-y divide-gray-200 border-b border-t border-gray-200">
-              {products.map((product, productIdx) => (
-                <li key={product.id} className="flex py-6 sm:py-10">
+              {items.map((item, itemIdx) => (
+                <li key={item.id} className="flex py-6 sm:py-10">
                   <div className="flex-shrink-0">
                     <img
-                      src={product.imageSrc}
-                      alt={product.imageAlt}
+                      src={item.thumbnail}
+                      alt={item.imageAlt}
                       className="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48"
                     />
                   </div>
@@ -78,27 +78,27 @@ export default function Cart() {
                       <div>
                         <div className="flex justify-between">
                           <h3 className="text-sm">
-                            <a href={product.href} className="font-medium text-gray-700 hover:text-gray-800">
-                              {product.name}
+                            <a href={item.href} className="font-medium text-gray-700 hover:text-gray-800">
+                              {item.title}
                             </a>
                           </h3>
                         </div>
                         <div className="mt-1 flex text-sm">
-                          <p className="text-gray-500">{product.color}</p>
-                          {product.size ? (
-                            <p className="ml-4 border-l border-gray-200 pl-4 text-gray-500">{product.size}</p>
+                          <p className="text-gray-500">{item.color}</p>
+                          {item.size ? (
+                            <p className="ml-4 border-l border-gray-200 pl-4 text-gray-500">{item.size}</p>
                           ) : null}
                         </div>
-                        <p className="mt-1 text-sm font-medium text-gray-900">{product.price}</p>
+                        <p className="mt-4 flex space-x-2 text-sm text-gray-700"> {item.brand}</p>
                       </div>
 
                       <div className="mt-4 sm:mt-0 sm:pr-9">
-                        <label htmlFor={`quantity-${productIdx}`} className="sr-only">
-                          Quantity, {product.name}
+                        <label htmlFor={`quantity-${itemIdx}`} className="sr-only">
+                          Quantity, {item.name}
                         </label>
                         <select
-                          id={`quantity-${productIdx}`}
-                          name={`quantity-${productIdx}`}
+                          id={`quantity-${itemIdx}`}
+                          name={`quantity-${itemIdx}`}
                           className="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                         >
                           <option value={1}>1</option>
@@ -120,14 +120,15 @@ export default function Cart() {
                       </div>
                     </div>
 
-                    <p className="mt-4 flex space-x-2 text-sm text-gray-700">
-                      {product.inStock ? (
+                    <p className="mt-4 text-sm font-medium text-gray-900">
+                      <span> ${item.price}</span>
+                      {/* {item.inStock ? (
                         <CheckIcon className="h-5 w-5 flex-shrink-0 text-green-500" aria-hidden="true" />
                       ) : (
                         <ClockIcon className="h-5 w-5 flex-shrink-0 text-gray-300" aria-hidden="true" />
                       )}
 
-                      <span>{product.inStock ? 'In stock' : `Ships in ${product.leadTime}`}</span>
+                      <span>{item.inStock ? 'In stock' : `Ships in ${item.leadTime}`}</span> */}
                     </p>
                   </div>
                 </li>
@@ -147,17 +148,17 @@ export default function Cart() {
             <dl className="mt-6 space-y-4">
               <div className="flex items-center justify-between">
                 <dt className="text-sm text-gray-600">Subtotal</dt>
-                <dd className="text-sm font-medium text-gray-900">{totalAmount}</dd>
+                <dd className="text-sm font-medium text-gray-900"> ${totalAmount}</dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="flex items-center text-sm text-gray-600">
                   <span>Shipping estimate</span>
                   <a href="#" className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500">
-                    <span className="sr-only">Learn more about how shipping is calculated</span>
+                    <span className="sr-only">Total amount should be greater than $50 to avail free delivery.</span>
                     <QuestionMarkCircleIcon className="h-5 w-5" aria-hidden="true" />
                   </a>
                 </dt>
-                <dd className="text-sm font-medium text-gray-900">$5.00</dd>
+                <dd className="text-sm font-medium text-gray-900">{totalAmount > 50 ?  'Free Delivery': '$5.00' }</dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="flex text-sm text-gray-600">
@@ -167,11 +168,11 @@ export default function Cart() {
                     <QuestionMarkCircleIcon className="h-5 w-5" aria-hidden="true" />
                   </a>
                 </dt>
-                <dd className="text-sm font-medium text-gray-900">{totalItems}</dd>
+                <dd className="text-sm font-medium text-gray-900">{totalItems} items</dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="text-base font-medium text-gray-900">Order total</dt>
-                <dd className="text-base font-medium text-gray-900">$112.32</dd>
+                <dd className="text-base font-medium text-gray-900"> ${ totalAmount > 50 ? totalAmount : totalAmount+5 }</dd>
               </div>
             </dl>
 
