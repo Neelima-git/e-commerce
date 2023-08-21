@@ -1,56 +1,23 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  increment,
-  incrementAsync,
-  selectCount,
   selectItems,
+  updateCartAsync
 } from './cartSlice';
 import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom';
+import { handler } from '@tailwindcss/aspect-ratio';
 
 export default function Cart() {
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
-  console.log(items);
-  const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0 )
-  const totalItems = items.reduce((total, item) => item.quantity + total, 0 )
 
-  // const items = [
-  //   {
-  //     id: 1,
-  //     name: 'Basic Tee',
-  //     href: '#',
-  //     price: '$32.00',
-  //     color: 'Sienna',
-  //     inStock: true,
-  //     size: 'Large',
-  //     imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-item-01.jpg',
-  //     imageAlt: "Front of men's Basic Tee in sienna.",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Basic Tee',
-  //     href: '#',
-  //     price: '$32.00',
-  //     color: 'Black',
-  //     inStock: false,
-  //     leadTime: '3–4 weeks',
-  //     size: 'Large',
-  //     imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-item-02.jpg',
-  //     imageAlt: "Front of men's Basic Tee in black.",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Nomad Tumbler',
-  //     href: '#',
-  //     price: '$35.00',
-  //     color: 'White',
-  //     inStock: true,
-  //     imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-item-03.jpg',
-  //     imageAlt: 'Insulated bottle with white base and black snap lid.',
-  //   },
-  // ]
+  const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0 )
+  const totalItems = items.reduce((total, item) => item.quantity + total, 0 );
+
+  const handleQuantity = (e, item) => {
+    dispatch(updateCartAsync({...item, quantity: +e.target.value}))
+  }
 
   return (
     <div className="bg-white">
@@ -68,7 +35,7 @@ export default function Cart() {
                   <div className="flex-shrink-0">
                     <img
                       src={item.thumbnail}
-                      alt={item.imageAlt}
+                      alt={item.title}
                       className="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48"
                     />
                   </div>
@@ -97,6 +64,8 @@ export default function Cart() {
                           Quantity, {item.name}
                         </label>
                         <select
+                          onChange={(e) => handleQuantity(e, item)}
+                          value={item.quantity}
                           id={`quantity-${itemIdx}`}
                           name={`quantity-${itemIdx}`}
                           className="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
