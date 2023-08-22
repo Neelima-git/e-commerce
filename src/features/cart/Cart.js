@@ -16,8 +16,9 @@ export default function Cart() {
   const totalItems = items.reduce((total, item) => item.quantity + total, 0 );
 
   const handleQuantity = (e, item) => {
-    dispatch(updateCartAsync({...item, quantity: +e.target.value}))
-  }
+    dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
+  };
+
 
   return (
     <div className="bg-white">
@@ -64,8 +65,7 @@ export default function Cart() {
                           Quantity, {item.name}
                         </label>
                         <select
-                          onChange={(e) => handleQuantity(e, item)}
-                          value={item.quantity}
+                          onChange={(e) => handleQuantity(e, item)} value={item.quantity}
                           id={`quantity-${itemIdx}`}
                           name={`quantity-${itemIdx}`}
                           className="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
