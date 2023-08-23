@@ -19,6 +19,10 @@ export default function Cart() {
     dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
   };
 
+  const handleRemove = (e, idle) => {
+     dispatch(deleteItemFromCartAsync(id))
+  }
+
 
   return (
     <div className="bg-white">
@@ -81,7 +85,7 @@ export default function Cart() {
                         </select>
 
                         <div className="absolute right-0 top-0">
-                          <button type="button" className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
+                          <button onClick={e => handleRemove(e, item.id)} type="button" className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
                             <span className="sr-only">Remove</span>
                             <XMarkIcon className="h-5 w-5" aria-hidden="true" />
                           </button>
