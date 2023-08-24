@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectItems,
-  updateCartAsync
+  updateCartAsync,
+  deleteItemFromCartAsync
 } from './cartSlice';
 import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom';
@@ -19,7 +20,7 @@ export default function Cart() {
     dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
   };
 
-  const handleRemove = (e, idle) => {
+  const handleRemove = (e, id) => {
      dispatch(deleteItemFromCartAsync(id))
   }
 
