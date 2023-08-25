@@ -5,9 +5,9 @@ import {
   updateCartAsync,
   deleteItemFromCartAsync
 } from './cartSlice';
-import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
+import { QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom';
-import { handler } from '@tailwindcss/aspect-ratio';
+// import { handler } from '@tailwindcss/aspect-ratio';
 
 export default function Cart() {
   const dispatch = useDispatch();
