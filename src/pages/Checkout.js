@@ -1,20 +1,31 @@
 import { TrashIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectItems,
+  updateCartAsync,
+  deleteItemFromCartAsync
+} from '../features/cart/cartSlice'
 
-const products = [
-    {
-        id: 1,
-        name: 'Micro Backpack',
-        href: '#',
-        price: '$80.00',
-        color: 'Moss',
-        size: '5L',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/checkout-page-04-product-01.jpg',
-        imageAlt:
-            'Moss green canvas compact baclastSeenkpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps.',
-    },
-    // More products...
-]
+
+
+// const items = [
+//     {
+//         id: 1,
+//         name: 'Micro Backpack',
+//         href: '#',
+//         price: '$80.00',
+//         color: 'Moss',
+//         size: '5L',
+//         imageSrc: 'https://tailwindui.com/img/ecommerce-images/checkout-page-04-product-01.jpg',
+//         imageAlt:
+//             'Moss green canvas compact baclastSeenkpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps.',
+//     },
+//     // More items...
+// ]
+
+
+
 
 const addresses = [
     {
@@ -28,6 +39,17 @@ const addresses = [
 ]
 
 export default function Checkout() {
+
+    const dispatch = useDispatch();
+    const items = useSelector(selectItems);
+  
+    const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0 )
+    const totalItems = items.reduce((total, item) => item.quantity + total, 0 );
+  
+    const handleRemove = (e, id) => {
+        dispatch(deleteItemFromCartAsync(id))
+     }
+   
     return (
         <div className="bg-white">
             {/* Background color split screen for large screens */}
@@ -46,10 +68,10 @@ export default function Checkout() {
                     <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
                         <h3 className="sr-only">Items in your cart</h3>
                         <ul role="list" className="divide-y divide-gray-200">
-                            {products.map((product) => (
+                            {items.map((product) => (
                                 <li key={product.id} className="flex px-4 py-6 sm:px-6">
                                     <div className="flex-shrink-0">
-                                        <img src={product.imageSrc} alt={product.imageAlt} className="w-20 rounded-md" />
+                                        <img src={product.thumbnail} alt={product.title} className="w-20 rounded-md" />
                                     </div>
 
                                     <div className="ml-6 flex flex-1 flex-col">
@@ -70,20 +92,20 @@ export default function Checkout() {
                                                     className="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
                                                 >
                                                     <span className="sr-only">Remove</span>
-                                                    <TrashIcon className="h-5 w-5" aria-hidden="true" />
+                                                    <TrashIcon onClick={e => handleRemove(e, product.id)} className="h-5 w-5" aria-hidden="true" />
                                                 </button>
                                             </div>
                                         </div>
 
                                         <div className="flex flex-1 items-end justify-between pt-2">
-                                            <p className="mt-1 text-sm font-medium text-gray-900">{product.price}</p>
+                                            <p className="mt-1 text-sm font-medium text-gray-900">${product.price}</p>
 
                                             <div className="ml-4">
                                                 <label htmlFor="quantity" className="sr-only">
                                                     Quantity
                                                 </label>
-                                                <Link to='/cart' ><p className='text-indigo-600' >Edit</p></Link>
-                                                {/* <select
+                                                {/* <Link to='/cart' ><p className='text-indigo-600' >Edit</p></Link> */}
+                                                <select
                                                     id="quantity"
                                                     name="quantity"
                                                     className="rounded-md border border-gray-300 text-left text-base font-medium text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
@@ -96,7 +118,7 @@ export default function Checkout() {
                                                     <option value={6}>6</option>
                                                     <option value={7}>7</option>
                                                     <option value={8}>8</option>
-                                                </select> */}
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -106,19 +128,19 @@ export default function Checkout() {
                         <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
                             <div className="flex items-center justify-between">
                                 <dt className="text-sm">Subtotal</dt>
-                                <dd className="text-sm font-medium text-gray-900">$64.00</dd>
+                                <dd className="text-sm font-medium text-gray-900">${totalAmount}</dd>
                             </div>
                             <div className="flex items-center justify-between">
                                 <dt className="text-sm">Shipping</dt>
-                                <dd className="text-sm font-medium text-gray-900">$5.00</dd>
+                                <dd className="text-sm font-medium text-gray-900">{totalAmount > 50 ?  'Free Delivery': '$5.00' }</dd>
                             </div>
                             <div className="flex items-center justify-between">
-                                <dt className="text-sm">Taxes</dt>
-                                <dd className="text-sm font-medium text-gray-900">$5.52</dd>
+                                <dt className="text-sm">Total items</dt>
+                                <dd className="text-sm font-medium text-gray-900">{totalItems}</dd>
                             </div>
                             <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                                 <dt className="text-base font-medium">Total</dt>
-                                <dd className="text-base font-medium text-gray-900">$75.52</dd>
+                                <dd className="text-base font-medium text-gray-900">${ totalAmount > 50 ? totalAmount : totalAmount+5 }</dd>
                             </div>
                         </dl>
 
