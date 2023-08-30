@@ -7,6 +7,7 @@ import {
   deleteItemFromCartAsync,
 } from "../features/cart/cartSlice";
 import { Navigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const addresses = [
   {
@@ -21,6 +22,11 @@ const addresses = [
 
 export default function Checkout() {
   const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const items = useSelector(selectItems);
 
   const totalAmount = items.reduce(
@@ -224,6 +230,7 @@ export default function Checkout() {
                       <input
                         type="text"
                         id="name-on-card"
+                        {...register("name", { required: "Name is required" })}
                         name="name-on-card"
                         autoComplete="cc-name"
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -242,6 +249,9 @@ export default function Checkout() {
                       <input
                         type="text"
                         id="card-number"
+                        {...register("email", {
+                          required: "Email is required",
+                        })}
                         name="card-number"
                         autoComplete="cc-number"
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -279,6 +289,7 @@ export default function Checkout() {
                         type="text"
                         name="cvc"
                         id="cvc"
+                        {...register("cvc", { required: "cvc is required" })}
                         autoComplete="csc"
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
