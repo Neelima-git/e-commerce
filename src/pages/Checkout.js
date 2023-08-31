@@ -202,6 +202,7 @@ export default function Checkout() {
                     <input
                       type="email"
                       id="email-address"
+                      {...register("email", { required: "Email is required" })}
                       name="email-address"
                       autoComplete="email"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -249,8 +250,8 @@ export default function Checkout() {
                       <input
                         type="text"
                         id="card-number"
-                        {...register("email", {
-                          required: "Email is required",
+                        {...register("card-number", {
+                          required: "Card number is required",
                         })}
                         name="card-number"
                         autoComplete="cc-number"
@@ -271,6 +272,9 @@ export default function Checkout() {
                         type="text"
                         name="expiration-date"
                         id="expiration-date"
+                        {...register("expiration-date", {
+                          required: "Expiration date is required",
+                        })}
                         autoComplete="cc-exp"
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
